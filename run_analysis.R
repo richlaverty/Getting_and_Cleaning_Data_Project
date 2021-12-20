@@ -12,12 +12,12 @@
 # 5. From the data set in step 4, creates a second, independent tidy data
 #    set with the average of each variable for each activity and each subject.
 
-# SET UP
+# 0.1 SET UP
 
 setwd("/home/rich/Documents/programs/data_science/03_Getting_and_Cleaning_Data/Week_4/Getting_and_Cleaning_Data_Project")
 library(dplyr)
 
-# DOWNLOAD THE DATA
+# 0.2 DOWNLOAD THE DATA
 
 if(!file.exists("data")){dir.create("data")}
 if(!file.exists("./data/raw_data.zip"))
@@ -27,7 +27,7 @@ if(!file.exists("./data/raw_data.zip"))
 }
 
 
-# LOAD THE DATA IN R
+# 0.3 LOAD THE DATA IN R
 features <- read.table("./data/unzipped/UCI HAR Dataset/features.txt")
 activityLabels = read.table("./data/unzipped/UCI HAR Dataset/activity_labels.txt")
 
@@ -39,7 +39,7 @@ x_test <- read.table("./data/unzipped/UCI HAR Dataset/test/X_test.txt")
 y_test <- read.table("./data/unzipped/UCI HAR Dataset/test/y_test.txt")
 subject_test <- read.table("./data/unzipped/UCI HAR Dataset/test/subject_test.txt")
 
-# NAME ALL OF THE COLUMNS IN THE DATA
+# 0.4 NAME ALL OF THE COLUMNS IN THE DATA
 
 colnames(x_train) <- features[,2]
 colnames(y_train) <- "activityID"
@@ -51,4 +51,8 @@ colnames(subject_test) <- "subjectID"
 
 colnames(activityLabels) <- c("activityID", "activityType")
 
+# 1. MERGING THE DATA INTO ONE DATA SET
 
+trainData <- cbind(y_train, subject_train, x_train)
+testData <- cbind(y_test, subject_test, x_test)
+mergedData <- rbind(trainData, testData)
