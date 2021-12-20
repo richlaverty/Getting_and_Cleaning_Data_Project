@@ -12,11 +12,43 @@
 # 5. From the data set in step 4, creates a second, independent tidy data
 #    set with the average of each variable for each activity and each subject.
 
+# SET UP
+
 setwd("/home/rich/Documents/programs/data_science/03_Getting_and_Cleaning_Data/Week_4/Getting_and_Cleaning_Data_Project")
+library(dplyr)
+
+# DOWNLOAD THE DATA
+
 if(!file.exists("data")){dir.create("data")}
 if(!file.exists("./data/raw_data.zip"))
 {
   download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip", destfile = "./data/raw_data.zip")
-  unzip(zipfile = "./data/raw_data.zip", exdir = "./unzipped")
+  unzip(zipfile = "./data/raw_data.zip", exdir = "./data/unzipped")
 }
+
+
+# LOAD THE DATA IN R
+features <- read.table("./data/unzipped/UCI HAR Dataset/features.txt")
+activityLabels = read.table("./data/unzipped/UCI HAR Dataset/activity_labels.txt")
+
+x_train <- read.table("./data/unzipped/UCI HAR Dataset/train/X_train.txt")
+y_train <- read.table("./data/unzipped/UCI HAR Dataset/train/y_train.txt")
+subject_train <- read.table("./data/unzipped/UCI HAR Dataset/train/subject_train.txt")
+
+x_test <- read.table("./data/unzipped/UCI HAR Dataset/test/X_test.txt")
+y_test <- read.table("./data/unzipped/UCI HAR Dataset/test/y_test.txt")
+subject_test <- read.table("./data/unzipped/UCI HAR Dataset/test/subject_test.txt")
+
+# NAME ALL OF THE COLUMNS IN THE DATA
+
+colnames(x_train) <- features[,2]
+colnames(y_train) <- "activityID"
+colnames(subject_train) <- "subjectID"
+
+colnames(x_test) <- features[,2]
+colnames(y_test) <- "activityID"
+colnames(subject_test) <- "subjectID"
+
+colnames(activityLabels) <- c("activityID", "activityType")
+
 
