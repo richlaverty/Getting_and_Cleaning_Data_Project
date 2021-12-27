@@ -82,5 +82,9 @@ colnames(meanAndStdDev)<-gsub("BodyBody", "Body", colnames(meanAndStdDev))
 #   in # 3, descriptive names replaced initials and abbreviations in the labels
 
 # 5. FROM THE DATA SET IN # 4, CREATE A SECOND, INDEPENDENT TIDY DATA SET WITH
-#    THE AVERAGE OF EACH VARIABLE FOR EACH ACTIVITY AND EACH SUBJECT
+#    THE AVERAGE OF EACH VARIABLE FOR EACH ACTIVITY AND EACH SUBJECT, AND
+#    FINALLY, OUTPUT THE TIDY DATA SET INTO A TEXT FILE
 
+tidySet <- aggregate(. ~subjectID + activityID, meanAndStdDev, mean)
+tidySet <- arrange(tidySet, subjectID, activityID)
+write.table(tidySet, "./data/tidySet.txt", row.names = FALSE)
