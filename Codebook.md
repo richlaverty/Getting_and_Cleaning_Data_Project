@@ -11,13 +11,13 @@ The R script run_analysis.R will download the data:
 to the subfolder /data/ of the working directory, and unzip the data.  The data is from  experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
 
 The dataset is composed of the files:
-- 'features_info.txt': Shows information about the variables used on the feature vector.
-- 'features.txt': List of all features.
-- 'activity_labels.txt': Links the class labels with their activity name.
-- 'train/X_train.txt': Training set.
-- 'train/y_train.txt': Training labels.
-- 'test/X_test.txt': Test set.
-- 'test/y_test.txt': Test labels.
+- './data/features_info.txt': Shows information about the variables used on the feature vector.
+- './data/unzipped/UCI HAR Dataset/features.txt': List of all features.
+- './data/unzipped/UCI HAR Dataset/activity_labels.txt': Links the class labels with their activity name.
+- './data/unzipped/UCI HAR Dataset/train/X_train.txt': Training set.
+- './data/unzipped/UCI HAR Dataset/train/y_train.txt': Training labels.
+- './data/unzipped/UCI HAR Dataset/test/X_test.txt': Test set.
+- './data/unzipped/UCI HAR Dataset/test/y_test.txt': Test labels.
 
 ** THE FILE run_analysis.R **
 
