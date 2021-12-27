@@ -22,6 +22,7 @@ The dataset is composed of the files:
 The data in the tidy data set:
 
 subjectID
+
 activity
 TimeBodyAccelerometer-mean()-X
 TimeBodyAccelerometer-mean()-Y
