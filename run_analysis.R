@@ -16,14 +16,12 @@
 # 5. From the data set in step 4, creates a second, independent tidy data
 #    set with the average of each variable for each activity and each subject.
 
-# 0.1 SET UP - CLEAR UP WORKSPACE, SET DIRECTORY, LOAD dplyr LIBRARY
-
+# clear up the workspace, set the working directory, load dplyr library
 rm(list = ls())
 setwd("/home/rich/Documents/programs/data_science/03_Getting_and_Cleaning_Data/Week_4/Project")
 library(dplyr)
 
-# 0.2 DOWNLOAD THE DATA
-
+# download and unzip the raw data
 if(!file.exists("data")){dir.create("data")}
 if(!file.exists("./data/raw_data.zip"))
 {
@@ -31,8 +29,7 @@ if(!file.exists("./data/raw_data.zip"))
   unzip(zipfile = "./data/raw_data.zip", exdir = "./data/unzipped")
 }
 
-
-# 0.3 LOAD THE DATA IN R
+# load the raw data into R
 features <- read.table("./data/unzipped/UCI HAR Dataset/features.txt")
 activityLabels = read.table("./data/unzipped/UCI HAR Dataset/activity_labels.txt")
 
@@ -44,8 +41,7 @@ x_test <- read.table("./data/unzipped/UCI HAR Dataset/test/X_test.txt")
 y_test <- read.table("./data/unzipped/UCI HAR Dataset/test/y_test.txt")
 subject_test <- read.table("./data/unzipped/UCI HAR Dataset/test/subject_test.txt")
 
-# 0.4 NAME ALL OF THE COLUMNS IN THE DATA
-
+# name the data columns
 colnames(x_train) <- features[,2]
 colnames(y_train) <- "activityID"
 colnames(subject_train) <- "subjectID"
@@ -114,6 +110,5 @@ for(i in 1:dim(tidySet)[1])
 tidySet <- rename(tidySet, activity = activityID)
 # save tidySet twice, once in the data folder, and once in the parent folder
 # so that it is easy to find for later analysis
-
 write.table(tidySet, "./data/tidySet.txt", row.names = FALSE)
 write.table(tidySet, "./tidySet.txt", row.names = FALSE)
