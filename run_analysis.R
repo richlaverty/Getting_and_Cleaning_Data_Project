@@ -1,4 +1,8 @@
-# R Script
+# run_analysis.R
+#
+# this is the end of course project for Getting and Cleaning Data.
+# this script will accomplish the following tasks on data taken from
+# 
 
 # 1. Merges the training and the test sets to create one data set.
 #
@@ -12,7 +16,8 @@
 # 5. From the data set in step 4, creates a second, independent tidy data
 #    set with the average of each variable for each activity and each subject.
 
-# 0.1 SET UP
+# 0.1 SET UP - CLEAR UP WORKSPACE, SET DIRECTORY, LOAD dplyr LIBRARY
+
 rm(list = ls())
 setwd("/home/rich/Documents/programs/data_science/03_Getting_and_Cleaning_Data/Week_4/Getting_and_Cleaning_Data_Project")
 library(dplyr)
@@ -87,4 +92,28 @@ colnames(meanAndStdDev)<-gsub("BodyBody", "Body", colnames(meanAndStdDev))
 
 tidySet <- aggregate(. ~subjectID + activityID, meanAndStdDev, mean)
 tidySet <- arrange(tidySet, subjectID, activityID)
+
+# in order for tidySet to be truly tidy, we need to replace the 
+# activityId (just a number) with the corresponding label
+# this function will return the name of an activity, given its ID
+labelActivity <- function(activityID)
+{
+  if(activityID < 1 | activityID > 6)
+  {
+    return("NA")
+  }
+  else
+  {
+    as.character(activityLabels[activityID,2])
+  }
+}
+for(i in 1:dim(tidySet)[1])
+{
+  tidySet[i,2] <- labelActivity(tidySet[i,2])
+}
+tidySet <- rename(tidySet, activity = activityID)
+# save tidySet twice, once in the data folder, and once in the parent folder
+# so that it is easy to find for later analysis
+
 write.table(tidySet, "./data/tidySet.txt", row.names = FALSE)
+write.table(tidySet, "./tidySet.txt", row.names = FALSE)
