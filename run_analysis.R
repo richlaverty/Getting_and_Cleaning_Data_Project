@@ -13,7 +13,7 @@
 #    set with the average of each variable for each activity and each subject.
 
 # 0.1 SET UP
-
+rm(list = ls())
 setwd("/home/rich/Documents/programs/data_science/03_Getting_and_Cleaning_Data/Week_4/Getting_and_Cleaning_Data_Project")
 library(dplyr)
 
@@ -56,3 +56,31 @@ colnames(activityLabels) <- c("activityID", "activityType")
 trainData <- cbind(y_train, subject_train, x_train)
 testData <- cbind(y_test, subject_test, x_test)
 mergedData <- rbind(trainData, testData)
+
+# 2. SELECTING THE DATA COLUMNS FOR MEAN AND STANDARD DEVIATION
+#    (AND THE subjectID and activityID)
+
+keeperSubjectID <- grepl("subjectID", colnames(mergedData))
+keeperActivityID <- grepl("activityID", colnames(mergedData))
+keeperMean <- grepl("[m,M]ean", colnames(mergedData))
+keeperStdDev <- grepl("[s,S]td", colnames(mergedData))
+keeperAll = keeperSubjectID | keeperActivityID | keeperMean | keeperStdDev
+
+meanAndStdDev <- mergedData[ , keeperAll == TRUE]
+
+# 3. USE DESCRIPTIVE ACTIVITY NAMES FOR THE COLUMNS OF THE DATA SET
+
+colnames(meanAndStdDev)<-gsub("^t", "Time", colnames(meanAndStdDev))
+colnames(meanAndStdDev)<-gsub("^f", "Frequency", colnames(meanAndStdDev))
+colnames(meanAndStdDev)<-gsub("Acc", "Accelerometer", colnames(meanAndStdDev))
+colnames(meanAndStdDev)<-gsub("Gyro", "Gyroscope", colnames(meanAndStdDev))
+colnames(meanAndStdDev)<-gsub("Mag", "Magnitude", colnames(meanAndStdDev))
+colnames(meanAndStdDev)<-gsub("BodyBody", "Body", colnames(meanAndStdDev))
+
+# 4. APPROPRIATELY LABEL THE DATA SET WITH DESCRIPTIVE NAMES
+#   in # 0.4, features were applied as the data labels for both x and y data
+#   in # 3, descriptive names replaced initials and abbreviations in the labels
+
+# 5. FROM THE DATA SET IN # 4, CREATE A SECOND, INDEPENDENT TIDY DATA SET WITH
+#    THE AVERAGE OF EACH VARIABLE FOR EACH ACTIVITY AND EACH SUBJECT
+
