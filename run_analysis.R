@@ -18,7 +18,9 @@
 
 # clear up the workspace, set the working directory, load dplyr library
 rm(list = ls())
-setwd("/home/rich/Documents/programs/data_science/03_Getting_and_Cleaning_Data/Week_4/Project")
+# setting the directory is commented out for submission so that
+# this script will run from whatever the current working directory is
+# setwd("/home/rich/Documents/programs/data_science/03_Getting_and_Cleaning_Data/Week_4/Project")
 library(dplyr)
 
 # download and unzip the raw data
