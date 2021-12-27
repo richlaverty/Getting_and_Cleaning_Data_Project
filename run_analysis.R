@@ -19,7 +19,7 @@
 # 0.1 SET UP - CLEAR UP WORKSPACE, SET DIRECTORY, LOAD dplyr LIBRARY
 
 rm(list = ls())
-setwd("/home/rich/Documents/programs/data_science/03_Getting_and_Cleaning_Data/Week_4/Getting_and_Cleaning_Data_Project")
+setwd("/home/rich/Documents/programs/data_science/03_Getting_and_Cleaning_Data/Week_4/Project")
 library(dplyr)
 
 # 0.2 DOWNLOAD THE DATA
