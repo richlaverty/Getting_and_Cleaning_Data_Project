@@ -20,6 +20,7 @@ The dataset is composed of the files:
 - 'test/y_test.txt': Test labels.
 
 ** THE FILE run_analysis.R **
+
 run_analysis.R will create a tidy data set, contained in the tidySet.txt file, that contains
 the mean and standard deviations from the original data set for each subject and activity.  The tidy set is created in steps
 
